@@ -1,0 +1,97 @@
+@import 'colors';
+@import 'header';
+@import 'slider';
+
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+
+	font-family: 'Dosis', sans-serif;
+	font-size: 16px;
+	color: white;
+	background-color: $color-winternight2;
+
+	// a {
+	// 	text-decoration: none;
+	// 	color: $color-grey;
+	// }
+}
+
+.container {
+	position: relative;
+	left: 0;
+	transition: left 0.2s linear;
+	
+}
+
+.container-shift {
+	left: -200px !important;
+}
+
+.nav-shift {
+	right: 0 !important;
+}
+
+#content {
+	margin-top: 50px;
+	position: relative;
+	padding: 20px 0;
+	max-width: 1200px;
+
+	@import 'products';
+	@import 'adminpanel/adminpanel';
+}
+
+footer {
+	text-align: center;
+	background-color: $color-winternight3;
+	padding: 15px;
+	line-height: 100px;
+	margin: 0;
+}
+
+@import 'media-queries';
+
+// Pagination
+.pagination {
+	list-style: none;
+	color: $color-winternight3;
+	font-weight: bold;
+	margin: 10px;
+	
+	a {
+		color: $color-winternight3;
+	}
+
+	li {
+		display: inline-block;
+		padding: 10px;
+		font-size: 1.1em;
+	}
+
+	.disabled {
+		color: $color-grey;
+	}
+
+	.active {
+		color: $color-brown;
+	}
+}
+
+// Links
+.link-color-dark {
+	color: $color-winternight;
+}
+
+.link-color-bright {
+	color: $color-grey;
+}
+
+.link-default {
+	text-decoration: none;
+}

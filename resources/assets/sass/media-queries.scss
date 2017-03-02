@@ -1,0 +1,147 @@
+$menu-item-width: 200px;
+
+@media (min-width: $max-width) {
+	#content {
+		margin: 100px auto;
+	}
+
+	.rslides {
+		//top: 100px;
+	}
+
+	header {
+		height: 100px;
+		#header-container {
+			height: 100px;
+
+			.menu-item {
+				position: absolute;
+				top: 0;
+				z-index: 10;
+
+				span {
+					display: inline;
+				}
+			}
+
+			#logo {
+				width: $menu-item-width;
+				display: block;
+			}
+			
+			.menu-item-search {
+				position: absolute;
+				left: $menu-item-width+1;
+				width: 400px;
+
+				i {
+					display: none;
+				}
+
+				.bookmark {
+					top: 0;
+					display: inline-block;
+					background-color: $color-winternight3 !important;
+					border: none;
+					
+					* {
+						padding: 0;
+						margin: 0;
+					}
+				}
+
+				input[type="text"] {
+					width: 250px !important;
+				}
+
+				input[type="submit"] {
+					width: 75px !important;
+				}
+			}
+			
+			.menu-item-login {
+				
+				right: $menu-item-width+1;
+				width: $menu-item-width;
+
+				input[type="text"], input[type="submit"], button{
+					width: 80% !important;
+				}
+			}
+
+			.menu-item-basket {
+				right: 0;
+				width: $menu-item-width;
+			}
+
+			.menu-item-nav-mini {
+				display: none;
+			}
+
+			.form-style {
+				border-bottom: none !important;
+			}
+
+			nav{
+				width: $max-width !important;
+				height: 50px !important;
+				display: inline-block;
+				background-color: $color-winternight3 !important;
+				border-top: 1px solid $color-grey3;
+				position: relative;
+				left: 0;
+				z-index: 1 !important;
+
+				ul {
+					padding: 0;
+
+					li {
+						display: inline-block;
+						vertical-align: top;
+						width: 150px;
+						border: none;
+					}
+				}
+				
+			}
+		}
+	}
+}
+
+@media (min-width: 800px) {
+	.product-container{
+
+		.product-image {
+			width: 45% !important;
+			margin: 0;
+		}
+		.product-param {
+			display: inline-block;
+			vertical-align: top;
+			width: 45% !important;
+			color: $color-winternight;
+			background-color: white;
+			
+			h1 {
+				text-align: right;
+			}
+
+			.product-price {
+				text-align: left;
+			}
+
+			.product-to-basket {
+				text-align: left;
+			}
+
+			.product-availability {
+				text-align: right;
+				
+			}
+
+			.product-size {
+				text-align: left;
+			}
+		}
+	}
+}
