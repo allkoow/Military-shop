@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 use App\Products;
 use App\Brands;
 use App\Categories;
@@ -62,5 +63,13 @@ class ProductsController extends Controller
                             ->orWhere('name', 'like','%' . $searchKey . '%')->get();
 
         return view('products.index',compact(['products','data','brands','brandsChecked']));
+    }
+
+    public function addToCart(Request $request, $id)
+    {
+        //$request->session()->pull('cart');
+        $request->session()->push('cart.products', $id);
+
+        return redirect()->route('cart');
     }
 }

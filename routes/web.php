@@ -147,4 +147,14 @@ Route::post('products/search', [
 		    'uses' => 'ProductsController@search'
 ]);
 
+Route::get('products/{product}/addToCart', [
+			'as' => 'products.addtocart',
+			'uses' => 'ProductsController@addToCart'
+]);
+
+// Route for cart
+Route::get('cart',[
+		   'as' => 'cart',
+		   'uses' => 'CartController@index'
+]);
 

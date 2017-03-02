@@ -13,7 +13,7 @@
             @if( Auth::user()->hasRole('administrator') )
                 <span> <a href="/../adminpanel">Panel administratora</a> </span>
             @else
-                <span> <a href="/../userpanel">Panel użytkownika</a> </span>
+                <span> <a href="/../userpanel/addresses">Panel użytkownika</a> </span>
             @endif
         @else
             {{ Form::open(['route' => 'login', 'class' => 'form-style', 'id' => 'form-login']) }}

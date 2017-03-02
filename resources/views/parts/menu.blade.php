@@ -2,7 +2,18 @@
         <i class="icon-basket"></i>
         <span>koszyk</span>
         <div class="bookmark">
-            <span>brak produktów w koszyku</span>
+            @if ($cart)
+                <table>
+                    @foreach ($cart as $product)
+                        <tr>
+                            <td>{{$product->name}}</td>
+                            <td>{{$product->price}} zł</td>
+                        </tr>  
+                    @endforeach
+                </table>
+            @else
+                <span>brak produktów w koszyku</span>
+            @endif
         </div>
     </div>
     
