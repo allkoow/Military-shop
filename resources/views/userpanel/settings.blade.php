@@ -14,16 +14,16 @@
 
 		<form method="post" action="edit">
 			{{ csrf_field() }}
-			<input type="hidden" name="id" value="{{$user->id}}">
-			<input type="text" name="name" value="{{$user->name}}">
-			<input type="text" name="surname" value="{{$user->surname}}">
-			<input type="text" name="phonenumber" value="{{$user->phone_number}}">
+			<input type="hidden" name="id" value="{{Auth::user()->id}}">
+			<input type="text" name="name" value="{{Auth::user()->name}}">
+			<input type="text" name="surname" value="{{Auth::user()->surname}}">
+			<input type="text" name="phonenumber" value="{{Auth::user()->phone_number}}">
 			<input type="submit" value="Zapisz zmiany">
 		</form>
 
 		<form method="post" action="changePassword">
 			{{ csrf_field() }}
-			<input type="hidden" name="id" value="{{$user->id}}">
+			<input type="hidden" name="id" value="{{Auth::user()->id}}">
 			<input type="password" name="passwordOld">
 			<input type="password" name="passwordNew">
 			<input type="password" name="passwordRepeat">

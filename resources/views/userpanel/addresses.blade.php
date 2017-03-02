@@ -13,7 +13,7 @@
 	@foreach($addresses as $address)
 		<div class="userpanel-address">
 			<span>{{$address->name}}</span> </br>
-			@if($address->id == $user->default_address)
+			@if($address->id == Auth::user()->default_address)
 				<span>DOMYŚLNY</span> </br>
 			@endif
 			<span>Miasto: </span> <span>{{$address->city}}</span> </br>

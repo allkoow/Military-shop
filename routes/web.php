@@ -30,20 +30,37 @@ Route::group([
 	'middleware' => 'roles',
 	'roles' => 'użytkownik'
 	], function() {
-		Route::get('userpanel', 'UserpanelController@index');
-		Route::get('userpanel/addresses', 'UserpanelController@addresses');
-		Route::get('userpanel/orders','UserpanelController@orders');
-		Route::get('userpanel/settings','UserpanelController@settings');
+		
+		// Route for userpanel.addresses
+		Route::resource('userpanel/addresses', 'UserAddressesController', [
+						'except' => 'show']);
+		
+		Route::get('userpanel/addresses/{id}/setdefault', [
+				   'as' => 'addresses.setdefault',
+				   'uses' => 'UserAddressesController@setDefaultAddress'
+		]);
 
-		Route::post('userpanel/edit', 'UserpanelController@edit');
-		Route::post('userpanel/changePassword', 'UserpanelController@changePassword');
+		// Route for userpanel.orders
+		Route::get('userpanel/orders', [
+				   'as' => 'userpanel.orders',
+				   'uses' => 'UserOrdersController@index'
+		]);
 
-		Route::get('userpanel/addaddress', 'UserpanelController@addAddress');
-		Route::post('userpanel/storeaddress', 'UserpanelController@storeAddress');
-		Route::get('userpanel/editaddress/{id}', 'UserpanelController@editAddress');
-		Route::post('userpanel/editaddress/updateaddress', 'UserpanelController@updateAddress');
-		Route::get('userpanel/deleteaddress/{id}', 'UserpanelController@deleteAddress');
-		Route::get('userpanel/setdefaultaddress/{id}', 'UserpanelController@setDefaultAddress');
+		// Route for userpanel.settings
+		Route::get('userpanel/settings', [
+				   'as' => 'userpanel.settings',
+				   'uses' => 'UserSettingsController@index'
+		]);
+
+		Route::put('userpanel/settings/editInformation', [
+				   'as' => 'userpanel.information.edit',
+				   'uses' => 'UserSettingsController@editInformation'
+		]);
+
+		Route::put('userpanel/settings/editPassword', [
+				   'as' => 'userpanel.password.edit',
+				   'uses' => 'UserSettingsController@editPassword'
+		]);
 });
 
 Route::group([
