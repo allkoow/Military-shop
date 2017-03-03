@@ -27,6 +27,8 @@
 			{{ Form::text($size->pivot->name, $size->pivot->number) }}
 			</br>
 		@endforeach
+
+		{{ Form::textarea('description') }}
 		
 		{{ Form::submit('Zapisz zmiany') }}
 		

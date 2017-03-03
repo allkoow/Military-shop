@@ -83,7 +83,7 @@ class AdminProductsController extends Controller
         $productId = Products::insertGetId(['name'=>$data['name'],
                                            'category_id'=>$data['category'],
                                            'subcategory_id'=>$data['subcategory'],
-                                           'brand'=>$data['brand'],
+                                           'brand_id'=>$data['brand'],
                                            'price'=>$data['price'],
                                            'description'=>$data['description'],
                                            'sex'=>$data['sex']]);
@@ -157,7 +157,8 @@ class AdminProductsController extends Controller
                       'category' => $request->input('category'),
                       'subcategory' => $request->input('subcategory'),
                       'brand' => $request->input('brand'),
-                      'price' => $request->input('price')  );
+                      'price' => $request->input('price'),
+                      'description' => $request->input('description')  );
 
         // Get sizes binding with category
         $sizes = Subcategories::find($data['category'])->sizes;
@@ -172,8 +173,9 @@ class AdminProductsController extends Controller
         $product->name = $data['name'];
         $product->category_id = $data['category'];
         $product->subcategory_id = $data['subcategory'];
-        $product->brand = $data['brand'];
+        $product->brand_id = $data['brand'];
         $product->price = $data['price'];
+        $product->description = $data['description'];
 
         $product->save();
 

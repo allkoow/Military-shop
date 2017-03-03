@@ -14,6 +14,9 @@
         <link href="https://fonts.googleapis.com/css?family=Dosis:400,600&subset=latin-ext" rel="stylesheet">
         <link rel="stylesheet" href="{{URL::asset('css/fontello/css/fontello.css')}}" />
         <link rel="stylesheet" href="{{URL::asset('css/app.css')}}" />
+
+        <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea' });</script>
         
         <title>Sklep</title>
 

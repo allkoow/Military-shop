@@ -147,14 +147,26 @@ Route::post('products/search', [
 		    'uses' => 'ProductsController@search'
 ]);
 
-Route::get('products/{product}/addToCart', [
-			'as' => 'products.addtocart',
-			'uses' => 'ProductsController@addToCart'
-]);
-
 // Route for cart
 Route::get('cart',[
 		   'as' => 'cart',
 		   'uses' => 'CartController@index'
 ]);
+
+// Route for cart
+Route::post('cart/add/{id}',[
+		    'as' => 'cart.add',
+		    'uses' => 'CartController@add'
+]);
+
+Route::post('cart/discard/{id}',[
+		    'as' => 'cart.discard',
+		    'uses' => 'CartController@discard'
+]);
+
+Route::post('cart/set-quantity/{id}',[
+		    'as' => 'cart.setquantity',
+		    'uses' => 'CartController@setQuantity'
+]);
+
 

@@ -7,9 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Products extends Model
 {
     //protected $hidden = ['pivot'];
+    private $noSize = 'nie dotyczy';
 
     public function sizes() {
     	return $this->belongsToMany(Sizes::class,'products_has_sizes','product_id','size_id')->withPivot('number');
+    }
+
+    public function hasNoSize() {
+        $size = $this->sizes()->first();
+
+        if(!$size || $size->name == $this->noSize)
+            return true;
+        
+        return false;
     }
 
     public function category() {

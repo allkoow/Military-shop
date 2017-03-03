@@ -9,11 +9,9 @@
 		<div class="product-param">
 			<h1>{{$product->name}}</h1>
 			<span>{{$product->brand->name}}<span> </br>
+			
 			<div class="product-availability">
 				<i class="icon-ok">dostępny</i>
-			</div>
-			<div class="product-size">
-				<span>Wybierz rozmiar</span>
 			</div>
 
 			<div class="product-price">
@@ -21,14 +19,24 @@
 				<span> zł </span>
 			</div>
 
-			<div class="product-to-basket">
-				<button class="product-to-basket"><i class="icon-basket"></i>Dodaj do koszyka</button>
-			</div>
+			{{ Form::open(['route' => ['cart.add',$product->id]]) }}
+				<div class="product-size">
+					@if(session('message'))
+						{{ session('message') }}
+					@endif
+					<span>Wybierz rozmiar</span>
+					{{ Form::select('size',$selectedSizes,1) }}
+				</div>
+
+				<div class="product-to-basket">
+					{{ Form::submit('Kup',['class' => 'product-buy-button']) }}
+				</div>
+			{{ Form::close() }}
 			
 		</div>
 		
 		<p class="product-desc">
-			{{$product->description}}
+			{!! $product->description !!}
 		</p>
 	</div>
 @stop

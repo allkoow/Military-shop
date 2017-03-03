@@ -1,15 +1,26 @@
  <div class="menu-item menu-item-basket">
         <i class="icon-basket"></i>
-        <span>koszyk</span>
+        <a href="{{route('cart')}}">Koszyk</a>
         <div class="bookmark">
-            @if ($cart)
+            @if($cart)
                 <table>
-                    @foreach ($cart as $product)
-                        <tr>
-                            <td>{{$product->name}}</td>
-                            <td>{{$product->price}} zł</td>
-                        </tr>  
-                    @endforeach
+                @foreach ($cart->items as $storedItem)
+                    <tr>
+                        <td>{{ $storedItem['item']->name}}</td>
+
+                        @if( $storedItem['size'] != 'nie dotyczy')
+                            <td> {{ $storedItem['size'] }}</td>
+                        @endif
+                        
+                        <td>({{ $storedItem['quantity'] }})</td>
+                        <td>{{ $storedItem['price'] }}</td>
+                        <td>
+                            {{ Form::open(['route' => ['cart.discard',$storedItem['item']->id]]) }}
+                                {{ Form::submit('x') }}
+                            {{ Form::close() }}
+                        </td> 
+                    </tr>
+                @endforeach
                 </table>
             @else
                 <span>brak produktów w koszyku</span>

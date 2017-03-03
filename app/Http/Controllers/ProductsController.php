@@ -43,8 +43,15 @@ class ProductsController extends Controller
     {
 		$product = Products::where('name',$name)->first();
 		$product->brand = $product->brand()->first();
+        $product->sizes = $product->sizes;
 
-        return view('products.show', compact('product'));
+        $selectedSizes = array();
+
+        foreach($product->sizes as $p) {
+            $selectedSizes[$p->id] = $p->name;
+        }
+
+        return view('products.show', compact(['product','selectedSizes']));
     }
 
     public function search(Request $request)
@@ -63,13 +70,5 @@ class ProductsController extends Controller
                             ->orWhere('name', 'like','%' . $searchKey . '%')->get();
 
         return view('products.index',compact(['products','data','brands','brandsChecked']));
-    }
-
-    public function addToCart(Request $request, $id)
-    {
-        //$request->session()->pull('cart');
-        $request->session()->push('cart.products', $id);
-
-        return redirect()->route('cart');
     }
 }

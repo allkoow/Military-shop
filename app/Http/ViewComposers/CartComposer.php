@@ -12,18 +12,12 @@ class CartComposer
 
     public function __construct()
     {
-        // cart data
-        $productsId = Session::has('cart') ? Session::get('cart.products') : null;
-        $this->cart = array();
-        
-        foreach($productsId as $key => $p) {
-            $this->cart[$key] = Products::where('id',$productsId[$key])->select('id', 'name', 'price')->first();
-        }
+        $this->cart = Session::has('cart') ? Session::get('cart') : null;
     }
 
     //Bind data to the view.
     public function compose(View $view)
     {
-        $view->with(['cart' => $this->cart]);
+       $view->with(['cart' => $this->cart]);
     }
 }

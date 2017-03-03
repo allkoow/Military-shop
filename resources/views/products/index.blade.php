@@ -52,7 +52,9 @@
 						<div class="product-cost">{{$product->price}} zł</div>
 						<div class="product-name">{{$product->name}}</div>
 
-						<button class='product-buy-button'> <a href="/../products/{{$product->id}}/addToCart">Kup</a> </button>
+						{{ Form::open(['route' => ['cart.add', $product->id]]) }}
+							{{ Form::submit('Kup',['class' => 'product-buy-button']) }}
+						{{ Form::close() }}
 
 					</div>
 				</div>
