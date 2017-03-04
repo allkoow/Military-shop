@@ -72,13 +72,7 @@ class AdminProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = array('name' => $request->input('name'),
-                      'category' => $request->input('category'),
-                      'subcategory' => $request->input('subcategory'),
-                      'brand' => $request->input('brand'),
-                      'price' => $request->input('price'),
-                      'description' => $request->input('description'),
-                      'sex' => $request->input('sex')  );
+        $data = $request->all();
 
         $productId = Products::insertGetId(['name'=>$data['name'],
                                            'category_id'=>$data['category'],
@@ -153,12 +147,7 @@ class AdminProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = array('name' => $request->input('name'),
-                      'category' => $request->input('category'),
-                      'subcategory' => $request->input('subcategory'),
-                      'brand' => $request->input('brand'),
-                      'price' => $request->input('price'),
-                      'description' => $request->input('description')  );
+        $data = $request->all();
 
         // Get sizes binding with category
         $sizes = Subcategories::find($data['category'])->sizes;
@@ -190,7 +179,6 @@ class AdminProductsController extends Controller
      */
     public function destroy($id)
     {
-        
         Products::where('id',$id)->delete();
         return redirect()->action('AdminProductsController@index');
     }

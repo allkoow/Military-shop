@@ -1,29 +1,27 @@
 @extends('layout')
 
 @section('content')
-	@if ($cart->items)
-		<table>
-			@foreach ($cart->items as $storedItem)
-                <tr>
-                    <td>{{ $storedItem['item']->name}}</td>
-                    <td>{{ $storedItem['item']->price }} zł</td>
+            @if($cart)
+                <table>
+                @foreach ($cart->items as $item)
+                    <tr>
+                        <td>{{ $item['name']}}</td>
 
-					<td>
-	                    {{ Form::open(['route' => ['cart.setquantity',$storedItem['item']->id]]) }}
-							{{ Form::number('quantity',$storedItem['quantity'],['min' => 1]) }}
-							{{ Form::submit('zmień') }}
-	                    {{ Form::close() }}
-                    </td>
-                    
-                    <td>
-                        {{ Form::open(['route' => ['cart.discard',$storedItem['item']->id]]) }}
-                            {{ Form::submit('x') }}
-                        {{ Form::close() }}
-                    </td> 
-                </tr>
-            @endforeach
-		</table>
-	@else
-		<span>Brak produktów w koszyku</span>
-	@endif
+                        @if( $item['size'] != 'nie dotyczy')
+                            <td> {{ $item['size'] }}</td>
+                        @endif
+
+                        <td>({{ $item['quantity'] }})</td>
+                        <td>{{ $item['totalPrice'] }}</td>
+                        <td>
+                            {{ Form::open(['route' => ['cart.discard',$item['id']]]) }}
+                                {{ Form::submit('x') }}
+                            {{ Form::close() }}
+                        </td> 
+                    </tr>
+                @endforeach
+                </table>
+            @else
+                <span>brak produktów w koszyku</span>
+            @endif
 @stop

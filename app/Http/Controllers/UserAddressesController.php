@@ -65,12 +65,7 @@ class UserAddressesController extends Controller
                         ->withInput();
         } 
         else {
-            $data = array('name' => $request->input('name'),
-                          'city' => $request->input('city'),
-                          'street' => $request->input('street'),
-                          'housenumber' => $request->input('housenumber'),
-                          'apartmentnumber' => $request->input('apartmentnumber'), 
-                          'postcode' => $request->input('postcode') );
+            $data = $request->all();
 
             $address = new Addresses();
             $address->name = $data['name'];
@@ -134,12 +129,7 @@ class UserAddressesController extends Controller
                         ->withInput();
         } 
         else {
-            $data = array('name' => $request->input('name'),
-                          'city' => $request->input('city'),
-                          'street' => $request->input('street'),
-                          'housenumber' => $request->input('house_number'),
-                          'apartmentnumber' => $request->input('apartment_number'), 
-                          'postcode' => $request->input('postcode') );
+            $data = $request->all();
 
             $address = Addresses::find($id);
             $address->name = $data['name'];

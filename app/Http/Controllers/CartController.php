@@ -17,20 +17,22 @@ class CartController extends Controller
 
     public function add(Request $request, $id)
     {
-        $item = Products::find($id);
+        $item = Products::where('id',$id)->select('name','price')->first();
         $sizeId = $request->input('size');
         
-        if(!$sizeId && !$item->hasNoSize()) {
+        $isNoSize = Products::find($id)->sizes()->first()->name;
+
+        if( is_null($sizeId) && $isNoSize != $item->noSize ) {
             return redirect()->route('products.show',['product' => $item->name])->with('message','Proszę wybrać rozmiar.');
-        } else {
+        } 
+        else {
             $oldCart = Session::has('cart') ? Session::get('cart') : null;
             
             if(!$sizeId)
-                $sizeId = 17;
+                $size = $item->noSize;
 
-            $size = Sizes::find($sizeId);
             $cart = new Cart($oldCart);
-            $cart->add($item,$id,$size->name);
+            $cart->add($item,$id,$size);
 
             Session::put('cart',$cart);
         }
@@ -40,25 +42,35 @@ class CartController extends Controller
 
     public function discard(Request $request, $id)
     {
-    	$cart = Session::get('cart');
-    	$cart->discard($id);
-    	Session::put('cart',$cart);
+    	$size = $request->input('size');
+
+        $cart = Session::get('cart');
+    	$cart->discard($id, $size);
+    	
+        if(empty($cart->items)) {
+            Session::pull('cart');
+        }
+        else {
+            Session::put('cart',$cart);
+        }
 
     	return redirect()->action('HomeController@index');
     }
 
     public function setQuantity(Request $request, $id)
     {
-    	$quantity = $request->input('quantity');
+    	$size = $request->input('size');
+        $quantity = $request->input('quantity');
 
     	$cart = Session::get('cart');
-    	$cart->setQuantity($quantity, $id);
+    	$cart->setQuantity($quantity, $id, $size);
 
     	return redirect()->route('cart');
     }
 
-    private function pull()
+    public function pull()
     {
         Session::pull('cart');
+        return redirect()->route('cart');
     }
 }

@@ -17,34 +17,65 @@ class Cart extends Model
     		$this->totalPrice = $oldCart->totalPrice;
     		$this->totalQuantity = $oldCart->totalQuantity;
     	}
+        else {
+            $this->items = [];
+        }
     }
 
     public function add($item, $id, $size)
     {
-    	$storedItem = ['quantity' => 0, 'price' => $item->price, 'size' => 'nie dotyczy', 'item' => $item];
+    	$storedItem = [
+                        'id' => $id,
+                        'name' => $item->name, 
+                        'quantity' => 1, 
+                        'price' => $item->price,
+                        'totalPrice' => $item->price, 
+                        'size' => $size,    
+                    ];
 
-    	$storedItem['size'] = $size;
+        $index = $this->find($id, $size);
 
+        if( !is_null($index) ) {
+            $storedItem = $this->items[$index];
+            $storedItem['quantity']++;
+            $storedItem['totalPrice'] = $storedItem['price'] * $storedItem['quantity'];
+            $this->items[$index] = $storedItem;
+        } 
+        else {
+            array_push($this->items,$storedItem);
+        }
+
+        print_r($this->items);
+    }
+
+    public function discard($id, $size)
+    {
+    	$index = $this->find($id, $size);
+
+        if( !is_null($index) ) {
+            unset($this->items[$index]);
+        }
+    }
+
+    public function setQuantity($newQuantity, $id, $size)
+    {
+    	$index = $this->find($id, $size);
+
+        if( !is_null($index) ) {
+            $this->items[$index]['quantity'] = $newQuantity;
+        }
+    }
+
+    private function find($id, $size) 
+    {
         if($this->items) {
-    		if(array_key_exists($id, $this->items)) {
-                if($this->items[$id]['size'] == $size) {
-    			    $storedItem = $this->items[$id];
+            foreach ($this->items as $key => $item) {
+                if($item['id'] == $id && $item['size'] == $size) {
+                    return $key;
                 }
-    		}
-    	}
+            }
+        }
 
-    	$storedItem['quantity']++;
-        $storedItem['price'] = $item->price * $storedItem['quantity'];
-        $this->items[$id] = $storedItem;
-    }
-
-    public function discard($id)
-    {
-    	unset($this->items[$id]);
-    }
-
-    public function setQuantity($newQuantity, $id)
-    {
-    	$this->items[$id]['quantity'] = $newQuantity;
+        return null;
     }
 }

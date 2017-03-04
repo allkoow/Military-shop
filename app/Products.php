@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Products extends Model
 {
     //protected $hidden = ['pivot'];
-    private $noSize = 'nie dotyczy';
+    public $noSize = 'nie dotyczy';
 
     public function sizes() {
     	return $this->belongsToMany(Sizes::class,'products_has_sizes','product_id','size_id')->withPivot('number');
@@ -16,7 +16,7 @@ class Products extends Model
     public function hasNoSize() {
         $size = $this->sizes()->first();
 
-        if(!$size || $size->name == $this->noSize)
+        if($size->name == $this->noSize)
             return true;
         
         return false;

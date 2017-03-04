@@ -34,10 +34,7 @@ class UserSettingsController extends Controller
                         ->withInput();
         }
 
-        $data = array('id' => $request->input('id'),
-                      'name' => $request->input('name'),
-                      'surname' => $request->input('surname'),
-                      'phonenumber' => $request->input('phone_number') );
+        $data = $request->all();
 
         $user = Auth::user();
         $user->name = $data['name'];
@@ -50,10 +47,7 @@ class UserSettingsController extends Controller
 
     public function editPassword(Request $request)
     {
-        $data = array('id' => $request->input('id'),
-              		'passwordOld' => $request->input('passwordOld'),
-              		'passwordNew' => $request->input('passwordNew'),
-              		'passwordRepeat' => $request->input('passwordRepeat'));
+        $data = $request->all();
 
         // Query -> Check old password in database 
         $password = Auth::user()->password;

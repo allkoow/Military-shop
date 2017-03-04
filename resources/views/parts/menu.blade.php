@@ -4,18 +4,19 @@
         <div class="bookmark">
             @if($cart)
                 <table>
-                @foreach ($cart->items as $storedItem)
+                @foreach ($cart->items as $item)
                     <tr>
-                        <td>{{ $storedItem['item']->name}}</td>
+                        <td>{{ $item['name']}}</td>
 
-                        @if( $storedItem['size'] != 'nie dotyczy')
-                            <td> {{ $storedItem['size'] }}</td>
+                        @if( $item['size'] != 'nie dotyczy')
+                            <td> {{ $item['size'] }}</td>
                         @endif
-                        
-                        <td>({{ $storedItem['quantity'] }})</td>
-                        <td>{{ $storedItem['price'] }}</td>
+
+                        <td>({{ $item['quantity'] }})</td>
+                        <td>{{ $item['totalPrice'] }}</td>
                         <td>
-                            {{ Form::open(['route' => ['cart.discard',$storedItem['item']->id]]) }}
+                            {{ Form::open(['route' => ['cart.discard',$item['id']]]) }}
+                                {{ Form::hidden('size',$item['size']) }}
                                 {{ Form::submit('x') }}
                             {{ Form::close() }}
                         </td> 
@@ -25,6 +26,7 @@
             @else
                 <span>brak produktów w koszyku</span>
             @endif
+            <a href="{{route('cart.pull')}}">Opróżnij</a>
         </div>
     </div>
     

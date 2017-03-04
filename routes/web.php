@@ -169,4 +169,9 @@ Route::post('cart/set-quantity/{id}',[
 		    'uses' => 'CartController@setQuantity'
 ]);
 
+Route::get('cart/pull', [
+		   'as' => 'cart.pull',
+		   'uses' => 'CartController@pull'
+]);
+
 
