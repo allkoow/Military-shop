@@ -153,7 +153,6 @@ Route::get('cart',[
 		   'uses' => 'CartController@index'
 ]);
 
-// Route for cart
 Route::post('cart/add/{id}',[
 		    'as' => 'cart.add',
 		    'uses' => 'CartController@add'

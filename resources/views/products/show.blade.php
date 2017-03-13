@@ -8,7 +8,7 @@
 		
 		<div class="product-param">
 			<h1>{{$product->name}}</h1>
-			<span>{{$product->brand->name}}<span> </br>
+			<div class="brand-name">{{$product->brand->name}}</div>
 			
 			<div class="product-availability">
 				<i class="icon-ok">dostępny</i>
@@ -20,16 +20,20 @@
 			</div>
 
 			{{ Form::open(['route' => ['cart.add',$product->id]]) }}
-				<div class="product-size">
-					@if(session('message'))
-						{{ session('message') }}
-					@endif
-					<span>Wybierz rozmiar</span>
-					{{ Form::select('size',$selectedSizes,1) }}
-				</div>
+				
+				@if($product->sizes()->first()->name != $product->noSize)
+					<div class="product-size">
+						@if(session('message'))
+							{{ session('message') }}
+						@endif
+
+						<span>Wybierz rozmiar</span>
+						{{ Form::select('size',$selectedSizes,1, ['class' => 'select-default']) }}
+					</div>
+				@endif
 
 				<div class="product-to-basket">
-					{{ Form::submit('Kup',['class' => 'product-buy-button']) }}
+					{{ Form::submit('Dodaj do koszyka',['class' => 'button-default']) }}
 				</div>
 			{{ Form::close() }}
 			

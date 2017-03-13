@@ -16,10 +16,13 @@ body {
 	color: white;
 	background-color: $color-winternight2;
 
-	// a {
-	// 	text-decoration: none;
-	// 	color: $color-grey;
-	// }
+	a {
+		text-decoration: none;
+		//color: $color-grey;
+		&:visited {
+			color: inherit;
+		}
+	}
 }
 
 .container {
@@ -45,6 +48,8 @@ body {
 
 	@import 'products';
 	@import 'adminpanel/adminpanel';
+	@import 'products/show';
+	@import 'products/filter';
 }
 
 footer {
@@ -94,4 +99,42 @@ footer {
 
 .link-default {
 	text-decoration: none;
+}
+
+.link-margin {
+	margin-bottom: 5px;
+}
+
+.icons {
+	font-family:fontello !important;
+}
+
+.cart-trash {
+	border: none;
+	background-color: inherit;
+	font-size: 1.5em;
+	color: $color-brown;
+}
+
+.bookmark-cart {
+	table {
+		width: 100%;
+		display: block;
+		border-collapse: collapse;
+		margin-bottom: 10px !important;
+
+		tr {
+			width: 100%;
+			td {
+				margin: 0;
+				border-bottom: 1px solid $color-grey2;
+			}
+		}
+	}
+
+	a {
+		&:focus {
+			text-decoration: underline !important;
+		}
+	}
 }

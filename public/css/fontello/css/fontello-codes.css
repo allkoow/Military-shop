@@ -1,6 +1,8 @@
 
 .icon-search:before { content: '\e800'; } /* '' */
-.icon-ok:before { content: '\e801'; } /* '' */
-.icon-cancel:before { content: '\e802'; } /* '' */
+.icon-plus-1:before { content: '\e801'; } /* '' */
+.icon-ok:before { content: '\e802'; } /* '' */
 .icon-user:before { content: '\e803'; } /* '' */
 .icon-basket:before { content: '\e804'; } /* '' */
+.icon-cancel:before { content: '\e805'; } /* '' */
+.icon-trash:before { content: '\f1f8'; } /* '' */

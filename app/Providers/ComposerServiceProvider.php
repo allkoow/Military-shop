@@ -16,7 +16,7 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(['parts.menu','adminpanel.categories.index'],
                           'App\Http\ViewComposers\MenuComposer');
 
-        view()->composer(['parts.menu', 'cart.index'],
+        view()->composer(['parts.cart', 'cart.index'],
                           'App\Http\ViewComposers\CartComposer');
     }
 

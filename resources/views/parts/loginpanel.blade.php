@@ -11,7 +11,7 @@
         @if(Auth::check())
             <button> <a href="/../logout">Wyloguj</a> </button>
             @if( Auth::user()->hasRole('administrator') )
-                <span> <a href="/../adminpanel">Panel administratora</a> </span>
+                <span> <a href="/../adminpanel">Panel administratora</a> </span> 
             @else
                 <span> <a href="/../userpanel/addresses">Panel użytkownika</a> </span>
             @endif

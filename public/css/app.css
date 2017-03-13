@@ -85,41 +85,10 @@ header #header-container .menu-item .show-form {
   display: block !important;
 }
 
-header #header-container .menu-item .form-style {
-  padding: 5px;
-  text-align: center;
-  border-bottom: 1px solid #cbcbcb;
-}
-
-header #header-container .menu-item .form-style input[type="text"], header #header-container .menu-item .form-style input[type="email"], header #header-container .menu-item .form-style input[type="password"] {
-  display: inline-block;
-  width: 100%;
-  border: 1px solid #000;
-  padding: 5px;
-  margin-bottom: 5px;
-}
-
-header #header-container .menu-item .form-style input[type="submit"] {
-  border: 1px solid #000;
-  padding: 5px;
-  width: 100%;
-  min-width: 100px;
-  background-color: #A19B88;
-}
-
-header #header-container .menu-item .form-style input[type="submit"]:hover {
-  cursor: pointer;
-  background-color: #908A77;
-}
-
 header #header-container .menu-item #form-login input[type="text"], header #header-container .menu-item #form-login input[type="email"], header #header-container .menu-item #form-login input[type="password"] {
   display: block;
   margin-right: auto;
   margin-left: auto;
-}
-
-header #header-container .menu-item #form-login input[type="submit"] {
-  width: 50%;
 }
 
 header #header-container .menu-item:hover {
@@ -290,6 +259,14 @@ body {
   background-color: #2d2e30;
 }
 
+body a {
+  text-decoration: none;
+}
+
+body a:visited {
+  color: inherit;
+}
+
 .container {
   position: relative;
   left: 0;
@@ -345,21 +322,6 @@ body {
   position: absolute;
   bottom: 20px;
   right: 75px;
-}
-
-#content .product .product-info .product-buy-button {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  width: 60px;
-  height: 30px;
-  border: 1px solid #000;
-  background-color: #A19B88;
-}
-
-#content .product .product-info .product-buy-button:hover {
-  cursor: pointer;
-  background-color: #908A77;
 }
 
 #content .product:hover {
@@ -424,6 +386,86 @@ body {
   border-bottom: 1px solid #dcdcdc;
 }
 
+#content .product-container {
+  text-align: center;
+}
+
+#content .product-container .product-image {
+  display: inline-block;
+  width: 95%;
+}
+
+#content .product-container .product-image img {
+  width: 100%;
+}
+
+#content .product-container .product-param {
+  padding: 0 10px;
+  width: 95%;
+  height: 100%;
+  display: inline-block;
+  border-bottom: 1px solid #ededed;
+}
+
+#content .product-container .product-param h1 {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 3em;
+  text-transform: uppercase;
+}
+
+#content .product-container .product-param .brand-name {
+  text-align: right;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+#content .product-container .product-param .product-availability {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+  border-bottom: 1px solid #ededed;
+}
+
+#content .product-container .product-param .product-price {
+  font-size: 1.5em !important;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ededed;
+}
+
+#content .product-container .product-param .product-price span {
+  font-size: 2em;
+}
+
+#content .product-container .product-param .product-size {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+  border-bottom: 1px solid #ededed;
+}
+
+#content .product-container .product-param .product-to-basket {
+  margin-bottom: 15px;
+}
+
+#content .filter-container {
+  width: 100%;
+  background-color: #ededed;
+  color: #3E3F41;
+  padding: 10px;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+}
+
+#content .filter-container .filter {
+  padding: 5px;
+}
+
+#content .filter-container .filter .filter-title {
+  padding: 5px;
+}
+
 footer {
   text-align: center;
   background-color: #1e1d20;
@@ -485,9 +527,17 @@ footer {
   header #header-container .menu-item-login input[type="text"], header #header-container .menu-item-login input[type="submit"], header #header-container .menu-item-login button {
     width: 80% !important;
   }
+  header #header-container .menu-item-login .bookmark {
+    padding-bottom: 10px;
+  }
   header #header-container .menu-item-basket {
     right: 0;
     width: 200px;
+  }
+  header #header-container .menu-item-basket .bookmark {
+    padding-bottom: 10px;
+    width: 120% !important;
+    right: 0 !important;
   }
   header #header-container .menu-item-nav-mini {
     display: none;
@@ -582,72 +632,39 @@ footer {
   text-decoration: none;
 }
 
-.product-container {
-  text-align: center;
+.link-margin {
+  margin-bottom: 5px;
 }
 
-.product-container .product-image {
-  display: inline-block;
-  width: 95%;
+.icons {
+  font-family: fontello !important;
 }
 
-.product-container .product-image img {
-  width: 100%;
-}
-
-.product-container .product-param {
-  padding: 0 10px;
-  width: 95%;
-  height: 100%;
-  display: inline-block;
-  border-bottom: 1px solid #ededed;
-}
-
-.product-container .product-param h1 {
-  margin-top: 5px;
-  margin-bottom: 10px;
-  font-size: 3em;
-  text-transform: uppercase;
-}
-
-.product-container .product-param .product-price {
-  font-size: 1.5em !important;
-}
-
-.product-container .product-param .product-price span {
-  font-size: 2em;
-}
-
-.product-container .product-param .product-availability {
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-  width: 100%;
-  border-bottom: 1px solid #ededed;
-}
-
-.product-container .product-param .product-size {
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-  width: 100%;
-  border-bottom: 1px solid #ededed;
-}
-
-.product-container .product-param .product-to-basket i {
-  margin-right: 5px;
-}
-
-.product-container .product-param .product-to-basket button {
-  padding: 8px;
-  margin: 15px 0;
-  font-size: 1.2em;
+.cart-trash {
   border: none;
-  background-color: #A19B88;
-  font-family: inherit;
+  background-color: inherit;
+  font-size: 1.5em;
+  color: #A19B88;
 }
 
-.product-container .product-param .product-to-basket button:hover {
-  cursor: pointer;
-  background-color: #908A77;
+.bookmark-cart table {
+  width: 100%;
+  display: block;
+  border-collapse: collapse;
+  margin-bottom: 10px !important;
+}
+
+.bookmark-cart table tr {
+  width: 100%;
+}
+
+.bookmark-cart table tr td {
+  margin: 0;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.bookmark-cart a:focus {
+  text-decoration: underline !important;
 }
 
 .table-standard {
@@ -672,6 +689,88 @@ footer {
 
 .table-standard tr:nth-child(even) {
   background-color: #cbcbcb;
+}
+
+.select-default {
+  width: 200px;
+  height: 30px;
+  border: 1px solid #dcdcdc;
+  font-family: "Dosis", sans-serif;
+  font-size: 1.1em;
+  margin-left: 10px;
+}
+
+.text-default {
+  width: 200px;
+  height: 25px;
+  border: 1px solid #dcdcdc;
+  font-family: "Dosis", sans-serif;
+  font-size: 1.1em;
+  margin-left: 5px;
+  padding: 5px;
+}
+
+.product-buy-button {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 60px;
+  height: 30px;
+  border: 1px solid #000;
+  background-color: #A19B88;
+}
+
+.product-buy-button:hover {
+  cursor: pointer;
+  background-color: #908A77;
+}
+
+.button-default {
+  height: 40px;
+  width: 200px;
+  border: 1px solid #000;
+  background-color: #A19B88;
+  font-family: "Dosis", sans-serif;
+  font-size: 1.1em;
+}
+
+.button-default:hover {
+  cursor: pointer;
+  background-color: #908A77;
+}
+
+.checkbox-default {
+  border: 1px solid #dcdcdc;
+  background-color: #ededed;
+}
+
+.form-style {
+  padding: 5px;
+  text-align: center;
+  border-bottom: 1px solid #cbcbcb;
+}
+
+.form-style input[type="text"], .form-style input[type="email"], .form-style input[type="password"] {
+  display: inline-block;
+  width: 100%;
+  height: 30px;
+  border: 1px solid #000;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.form-style input[type="submit"] {
+  border: 1px solid #000;
+  padding: 5px;
+  width: 100%;
+  height: 30px;
+  min-width: 100px;
+  background-color: #A19B88;
+}
+
+.form-style input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #908A77;
 }
 
 /*# sourceMappingURL=app.css.map */

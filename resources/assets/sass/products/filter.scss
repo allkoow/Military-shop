@@ -1,0 +1,15 @@
+.filter-container {
+	width: 100%;
+	background-color: $color-grey;
+	color: $color-winternight;
+	padding: 10px;
+	box-sizing: border-box;
+	padding-bottom: 10px;
+
+	.filter {
+		padding: 5px;
+		.filter-title {
+			padding: 5px;
+		}
+	}
+}

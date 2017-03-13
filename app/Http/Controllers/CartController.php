@@ -30,6 +30,8 @@ class CartController extends Controller
             
             if(!$sizeId)
                 $size = $item->noSize;
+            else
+                $size = Sizes::find($sizeId)->name;
 
             $cart = new Cart($oldCart);
             $cart->add($item,$id,$size);

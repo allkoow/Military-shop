@@ -1,0 +1,92 @@
+.select-default {
+	width: 200px;
+	height: 30px;
+	border: 1px solid $color-grey2;
+	font-family: $font-default;
+	font-size: 1.1em;
+	margin-left: 10px;
+
+	&:focus {
+
+	}
+}
+
+.text-default {
+	width: 200px;
+	height: 25px;
+	border: 1px solid $color-grey2;
+	font-family: $font-default;
+	font-size: 1.1em;
+	margin-left: 5px;
+	padding: 5px;
+
+	&:focus {
+
+	}
+}
+
+.product-buy-button {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	width: 60px;
+	height: 30px;
+	border: 1px solid $color-black;
+	background-color: $color-brown;
+
+	&:hover {
+		cursor: pointer;
+		background-color: $color-brown2;
+	}
+}
+
+.button-default {
+	height: 40px;
+	width: 200px;
+	border: 1px solid $color-black;
+	background-color: $color-brown;
+	font-family: $font-default;
+	font-size: 1.1em;
+
+	&:hover {
+		cursor: pointer;
+		background-color: $color-brown2;
+	}
+}
+
+.checkbox-default {
+	border: 1px solid $color-grey2;
+	background-color: $color-grey;
+}
+
+.form-style {
+	padding: 5px;
+	text-align: center;
+	border-bottom: 1px solid $color-grey3;
+
+	input[type="text"], input[type="email"], input[type="password"] 
+	{
+		display: inline-block;
+		width: 100%;
+		height: 30px;
+		border: 1px solid $color-black;
+		padding: 5px;
+		margin-bottom: 5px;
+	}
+
+	input[type="submit"] 
+	{
+		border: 1px solid $color-black;
+		padding: 5px;
+		width: 100%;
+		height: 30px;
+		min-width: 100px;
+		background-color: $color-brown;
+
+		&:hover
+		{
+			cursor: pointer;
+			background-color: $color-brown2;
+		}
+	}
+}

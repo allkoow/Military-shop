@@ -7,6 +7,6 @@ $(document).ready( function()
 		$(this).toggleClass("nav-mini-clicked");
 	} );
 
-	$(".rslides").responsiveSlides();
+	//$(".rslides").responsiveSlides();
 });
 

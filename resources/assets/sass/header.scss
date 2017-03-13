@@ -68,6 +68,7 @@ header
 				background-color: $color-grey;
 				width: 100%;
 				max-width: $max-width;
+				//padding-bottom: 10px;
 
 				span {
 					display: inline;
@@ -90,36 +91,6 @@ header
 				display: block !important;
 			}
 
-			.form-style {
-				padding: 5px;
-				text-align: center;
-				border-bottom: 1px solid $color-grey3;
-
-				input[type="text"], input[type="email"], input[type="password"] 
-				{
-					display: inline-block;
-					width: 100%;
-					border: 1px solid $color-black;
-					padding: 5px;
-					margin-bottom: 5px;
-				}
-
-				input[type="submit"] 
-				{
-					border: 1px solid $color-black;
-					padding: 5px;
-					width: 100%;
-					min-width: 100px;
-					background-color: $color-brown;
-
-					&:hover
-					{
-						cursor: pointer;
-						background-color: $color-brown2;
-					}
-				}
-			}
-
 			#form-login {
 				input[type="text"], input[type="email"], input[type="password"] 
 				{
@@ -130,7 +101,7 @@ header
 
 				input[type="submit"] 
 				{
-					width: 50%;
+					//width: 50%;
 				}
 			}
 

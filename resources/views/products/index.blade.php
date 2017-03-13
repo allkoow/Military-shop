@@ -15,26 +15,26 @@
 
 				<div class="filter">
 					<div class="filter-title">
-						<span>Cena</span> </br>
+						<strong>Cena</strong>
 					</div>
-						{{ Form::label('priceMin','od: ') }}
-						{{ Form::text('priceMin',$data['priceMin']) }}
+						{{ Form::label('priceMin','od') }}
+						{{ Form::text('priceMin',$data['priceMin'],['class' => 'text-default']) }}
 
-						{{ Form::label('priceMax','do: ') }}
-						{{ Form::text('priceMax',$data['priceMax']) }}
+						{{ Form::label('priceMax','do') }}
+						{{ Form::text('priceMax',$data['priceMax'],['class' => 'text-default']) }}
 				</div>
 
 				<div class="filter">
 					<div class="filter-title">
-						<span>Marka</span> </br>
+						<strong>Marka</strong>
 					</div>
 						@foreach ($brands as $brand)
+							{{ Form::checkbox('brandsChecked[]', $brand->id, in_array($brand->id, $brandsChecked), ['class' => 'checkbox-default']) }}
 							{{ Form::label('brandsChecked[]', $brand->name) }}
-							{{ Form::checkbox('brandsChecked[]', $brand->id, in_array($brand->id, $brandsChecked)) }}
 						@endforeach
 				</div>
 				
-				{{ Form::submit('Filtruj') }}
+				{{ Form::submit('Filtruj',['class' => 'button-default']) }}
 			{{ Form::close() }}
 		</div>
 		

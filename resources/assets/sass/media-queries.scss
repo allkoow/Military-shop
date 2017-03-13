@@ -67,11 +67,21 @@ $menu-item-width: 200px;
 				input[type="text"], input[type="submit"], button{
 					width: 80% !important;
 				}
+
+				.bookmark {
+					padding-bottom: 10px;
+				}
 			}
 
 			.menu-item-basket {
 				right: 0;
 				width: $menu-item-width;
+
+				.bookmark {
+					padding-bottom: 10px;
+					width: 120% !important;
+					right: 0 !important;
+				}
 			}
 
 			.menu-item-nav-mini {
