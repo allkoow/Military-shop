@@ -15,6 +15,10 @@ class Orders extends Model
     }
 
     public function delivery() {
-    	return $this->belongsTo(DeliveryMethods::class,'id');
+    	return $this->belongsTo(DeliveryMethods::class,'delivery_method_id');
+    }
+
+    public function address() {
+    	return $this->belongsTo(Addresses::class,'address_id');
     }
 }

@@ -34,12 +34,16 @@ class CartController extends Controller
                 $size = Sizes::find($sizeId)->name;
 
             $cart = new Cart($oldCart);
-            $cart->add($item,$id,$size);
-
-            Session::put('cart',$cart);
+            $addingStatus = $cart->add($item,$id,$size);
         }
 
-        return redirect()->action('HomeController@index');
+        if($addingStatus) {
+            Session::put('cart',$cart);
+            return redirect()->route('cart');
+        }
+        else {
+            return redirect()->route('cart')->with('error', 'Nie można dodać produktu. Zbyt mała liczba produktu w magazynie.');
+        }
     }
 
     public function discard(Request $request, $id)
@@ -65,9 +69,14 @@ class CartController extends Controller
         $quantity = $request->input('quantity');
 
     	$cart = Session::get('cart');
-    	$cart->setQuantity($quantity, $id, $size);
+    	$changingStatus = $cart->setQuantity($quantity, $id, $size);
 
-    	return redirect()->route('cart');
+        if($changingStatus) {
+            return redirect()->route('cart');
+        }
+        else {
+            return redirect()->route('cart')->with('error', 'Zbyt mała liczba produktów w magazynie.');
+        }
     }
 
     public function pull()

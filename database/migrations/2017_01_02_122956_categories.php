@@ -18,6 +18,10 @@ class Categories extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        Schema::table('categories', function ($table) {
+            $table->softDeletes();
+        });
     }
 
     /**

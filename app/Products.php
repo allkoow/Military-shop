@@ -3,11 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Products extends Model
 {
-    //protected $hidden = ['pivot'];
-    public $noSize = 'nie dotyczy';
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
+    public $noSize = '-';
 
     public function sizes() {
     	return $this->belongsToMany(Sizes::class,'products_has_sizes','product_id','size_id')->withPivot('number');
@@ -33,4 +37,8 @@ class Products extends Model
     public function brand() {
     	return $this->belongsTo(Brands::class,'brand_id');
     }
+
+    // public function images() {
+    //     return $this->belongsTo(Image::class,'product_id');
+    // }
 }

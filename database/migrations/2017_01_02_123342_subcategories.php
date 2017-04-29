@@ -23,6 +23,10 @@ class Subcategories extends Migration
         Schema::table('subcategories', function(Blueprint $table) {
             $table->foreign('category_id')->references('id')->on('categories');
         });
+
+        Schema::table('subcategories', function ($table) {
+            $table->softDeletes();
+        });
     }
 
     /**

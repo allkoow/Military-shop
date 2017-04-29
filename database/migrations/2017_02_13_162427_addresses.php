@@ -20,13 +20,17 @@ class Addresses extends Migration
             $table->string('city');
             $table->string('street');
             $table->integer('house_number');
-            $table->integer('apartment_number');
+            $table->integer('apartment_number')->nullable();
             $table->string('postcode');
             $table->timestamps();
         });
 
         Schema::table('addresses', function(Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
+        });
+
+        Schema::table('addresses', function ($table) {
+            $table->softDeletes();
         });
     }
 

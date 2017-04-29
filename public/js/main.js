@@ -1,12 +1,10 @@
 $(document).ready( function() 
 {
-	$(".menu-item-nav-mini").click( function() 
+	$(".menu-item-nav").click( function() 
 	{
-		$("#container").toggleClass("container-shift");
-		$("nav").toggleClass("nav-shift");
+		$("nav").toggleClass("nav-transition");
+		$(".container").toggleClass("container-shift");
 		$(this).toggleClass("nav-mini-clicked");
 	} );
-
-	//$(".rslides").responsiveSlides();
 });
 

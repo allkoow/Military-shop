@@ -2,66 +2,41 @@
 
 @section('content')
 	<div class="products-page">
-		<div class='filter-container'>
-			{{ Form::open(['route' => 'products.index', 'method' => 'GET']) }}
-				
-				@if ( Input::get('category') )
-					{{ Form::hidden('category',Input::get('category')) }}
-				@endif
+		{{ Form::open(['route' => 'products.index', 'method' => 'GET']) }}
+		
+		<div class='subpanel-container filter-container'>
+			@if ( Input::get('category') )
+				{{ Form::hidden('category',Input::get('category')) }}
+			@endif
 
-				@if ( Input::get('subcategory') )
-					{{ Form::hidden('subcategory',Input::get('subcategory')) }}
-				@endif
+			@if ( Input::get('subcategory') )
+				{{ Form::hidden('subcategory',Input::get('subcategory')) }}
+			@endif
 
-				<div class="filter">
-					<div class="filter-title">
-						<strong>Cena</strong>
-					</div>
-						{{ Form::label('priceMin','od') }}
-						{{ Form::text('priceMin',$data['priceMin'],['class' => 'text-default']) }}
+			<div class="panel panel-left-align">
+				<h2>Cena</h2>
+				{{ Form::label('priceMin','od') }}
+				{{ Form::text('priceMin',$data['priceMin'],['class' => 'text-default']) }}
 
-						{{ Form::label('priceMax','do') }}
-						{{ Form::text('priceMax',$data['priceMax'],['class' => 'text-default']) }}
-				</div>
+				{{ Form::label('priceMax','do') }}
+				{{ Form::text('priceMax',$data['priceMax'],['class' => 'text-default']) }}
+			</div>
 
-				<div class="filter">
-					<div class="filter-title">
-						<strong>Marka</strong>
-					</div>
-						@foreach ($brands as $brand)
-							{{ Form::checkbox('brandsChecked[]', $brand->id, in_array($brand->id, $brandsChecked), ['class' => 'checkbox-default']) }}
-							{{ Form::label('brandsChecked[]', $brand->name) }}
-						@endforeach
-				</div>
-				
-				{{ Form::submit('Filtruj',['class' => 'button-default']) }}
-			{{ Form::close() }}
+			<div class="panel panel-left-align">
+				<h2>Marka</h2>
+				@foreach ($brands as $brand)
+					{{ Form::checkbox('brandsChecked[]', $brand->id, in_array($brand->id, $brandsChecked), ['id' => $brand->id]) }}
+					<label for="{{$brand->id}}"><span></span>{{$brand->name}}</label>
+				@endforeach
+			</div>
+			
+			<div class="row row-left-align">
+				{{ Form::submit('Filtruj',['class' => 'button-small filter-button']) }}
+			</div>
 		</div>
 		
-		<div class='products-list'>
-			@foreach($products as $product)
-				<div class="product">
-					<a href="/../products/{{$product->name}}" >
-						<span>Info</span>
-						<div class="product-img">
-							
-						</div>
-					</a>
-					
-					<div class="product-info">
-						<div class="product-cost">{{$product->price}} zł</div>
-						<div class="product-name">{{$product->name}}</div>
-
-						{{ Form::open(['route' => ['cart.add', $product->id]]) }}
-							{{ Form::submit('Kup',['class' => 'product-buy-button']) }}
-						{{ Form::close() }}
-
-					</div>
-				</div>
-					
-			@endforeach
-
-
-		</div>
+		{{ Form::close() }}
+		
+		@include('parts/products-list')
 	</div>
 @stop

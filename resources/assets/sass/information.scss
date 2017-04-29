@@ -1,0 +1,19 @@
+.information-panel {
+	display: block;
+	width: 100%;
+	margin: 5px 0;
+	height: 40px;
+	line-height: 40px;
+}
+
+.error-panel {
+	color: red;
+	background-color: $color-error;
+	border: 1px solid $color-error3;
+}
+
+.success-panel {
+	color: green;
+	background-color: $color-success;
+	border: 1px solid green;
+}

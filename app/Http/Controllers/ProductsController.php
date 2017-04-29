@@ -9,6 +9,7 @@ use App\Products;
 use App\Brands;
 use App\Categories;
 use App\Subcategories;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -32,6 +33,10 @@ class ProductsController extends Controller
         					->whereIn('brand_id',$brandsChecked)
         					->get();
 
+        foreach ($products as $product) {
+            $product->images = DB::table('images')->where('product_id',$product->id)->get();
+        }
+        
         $data = array();
         $data['priceMin'] = $priceMin;
         $data['priceMax'] = $priceMax;
@@ -43,7 +48,9 @@ class ProductsController extends Controller
     {
 		$product = Products::where('name',$name)->first();
 		$product->brand = $product->brand()->first();
-        $product->sizes = $product->sizes;
+        $product->sizes = $product->sizes()->where('number', '>', 0)->get();
+
+        $product->images = DB::table('images')->where('product_id',$product->id)->get();
 
         $selectedSizes = array();
 

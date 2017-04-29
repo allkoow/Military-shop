@@ -1,9 +1,9 @@
 @extends('adminpanel/layout')
 
 @section('ordersShow')
-	<div class="information-container">
-		<h2 class='border-bottom'>Podsumowanie zamówienia</h2>
-		<table class='table-standard table-margin-bottom'>
+	<div class="subpanel-container">
+		<h1>Podsumowanie zamówienia</h1>
+		<table class='table-default'>
 			<tr>
 				<th>Wartość</th>
 				<th>Status</th>
@@ -23,9 +23,9 @@
 		<a class='link-default link-color-dark' href="/../adminpanel/orders/{{$order->id}}/edit">Potwierdź wysłanie produktu</a>
 	</div>
   
-	<div class="information-container">
-		<h2 class='border-bottom'>Informacje o kupującym</h2>
-		<table class="table-standard">
+	<div class="subpanel-container">
+		<h1>Informacje o kupującym</h1>
+		<table class="table-default">
 			<tr>
 				<th>Imię</th>
 				<th>Nazwisko</th>
@@ -41,9 +41,9 @@
 		</table>
 	</div>
 	
-	<div class="information-container">
-		<h2 class='border-bottom'>Adres kupującego</h2>
-		<table class="table-standard">
+	<div class="subpanel-container">
+		<h1>Adres kupującego</h1>
+		<table class="table-default">
 			<tr>
 				<th>Miasto</th>
 				<th>Ulica</th>
@@ -52,18 +52,18 @@
 				<th>Kod pocztowy</th>
 			</tr>
 			<tr>
-				<td>{{$order->user->defaultAddress->city}}</td>
-				<td>{{$order->user->defaultAddress->street}}</td>
-				<td>{{$order->user->defaultAddress->house_number}}</td>
-				<td>{{$order->user->defaultAddress->apartment_number}}</td>
-				<td>{{$order->user->defaultAddress->postcode}}</td>
+				<td>{{$order->address->city}}</td>
+				<td>{{$order->address->street}}</td>
+				<td>{{$order->address->house_number}}</td>
+				<td>{{$order->address->apartment_number}}</td>
+				<td>{{$order->address->postcode}}</td>
 			</tr>
 		</table>
 	</div>
 	
-	<div>
-		<h2 class='border-bottom'>Produkty</h2>
-			<table class='table-standard'>
+	<div class="subpanel-container">
+		<h1>Produkty</h1>
+		<table class='table-default'>
 			<tr>
 				<th>Id</th>
 				<th>Nazwa</th>

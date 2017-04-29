@@ -2,14 +2,13 @@ nav {
 	display: block;
 	width: 200px;
 	background-color: $color-brown;
-	position: fixed;
+	text-align: center;
+	position: absolute;
 	top: 0;
 	right: -200px;
+	z-index: 100;
+	font-size: 15px;
 	height: 100%;
-	z-index: 20;
-	font-size: 16px;
-
-	transition: right 0.2s linear;
 
 	ul {
 		list-style: none;
@@ -49,8 +48,38 @@ nav {
 					}
 				}
 			}
-
-			
 		}
+	}
+}
+
+.nav-transiotion {
+	transition: right 0.2s linear;
+}
+
+@media(min-width: $max-width) {
+	nav{
+		margin: auto;
+		position: relative;
+		right: 0;
+		width: $max-width !important;
+		height: 50px !important;
+		display: block;
+		z-index: 1 !important;
+
+		ul {
+			padding: 0;
+
+			li {
+				display: inline-block;
+				vertical-align: top;
+				width: 150px;
+				border: none;
+
+				&:first-child {
+					border-top: none;
+				}
+			}
+		}
+		
 	}
 }

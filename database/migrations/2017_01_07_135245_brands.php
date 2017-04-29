@@ -18,6 +18,10 @@ class Brands extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        Schema::table('brands', function ($table) {
+            $table->softDeletes();
+        });
     }
 
     /**

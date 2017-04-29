@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Products;
+use App\Sizes;
 
 class Cart extends Model
 {
@@ -19,13 +21,14 @@ class Cart extends Model
     	}
         else {
             $this->items = [];
+            $this->totalPrice = 0.00;
         }
     }
 
-    public function add($item, $id, $size)
+    public function add($item, $productId, $size)
     {
     	$storedItem = [
-                        'id' => $id,
+                        'id' => $productId,
                         'name' => $item->name, 
                         'quantity' => 1, 
                         'price' => $item->price,
@@ -33,19 +36,30 @@ class Cart extends Model
                         'size' => $size,    
                     ];
 
-        $index = $this->find($id, $size);
+        $index = $this->find($productId, $size);
+        $sizeId = Sizes::where('name', $size)->select('id')->first()->id;
+        $number = Products::find($productId)->sizes()->find($sizeId)->pivot->number;
 
-        if( !is_null($index) ) {
-            $storedItem = $this->items[$index];
-            $storedItem['quantity']++;
-            $storedItem['totalPrice'] = $storedItem['price'] * $storedItem['quantity'];
-            $this->items[$index] = $storedItem;
+        if( $storedItem['quantity'] <= $number ) {
+            if( !is_null($index) ) {
+                $storedItem = $this->items[$index];
+                $storedItem['quantity']++;
+                $storedItem['totalPrice'] = $storedItem['price'] * $storedItem['quantity'];
+                $this->items[$index] = $storedItem;
+            } 
+            else {
+                array_push($this->items,$storedItem);
+            }
+
+            $this->totalPrice += $storedItem['price'];
+
+            return true;
         } 
         else {
-            array_push($this->items,$storedItem);
+            return false;
         }
-
-        print_r($this->items);
+        
+        //print_r($this->items);
     }
 
     public function discard($id, $size)
@@ -53,16 +67,27 @@ class Cart extends Model
     	$index = $this->find($id, $size);
 
         if( !is_null($index) ) {
+            $this->totalPrice -= $this->items[$index]['price'] * $this->items[$index]['quantity'];
             unset($this->items[$index]);
         }
     }
 
-    public function setQuantity($newQuantity, $id, $size)
+    public function setQuantity($newQuantity, $productId, $size)
     {
-    	$index = $this->find($id, $size);
+    	$index = $this->find($productId, $size);
+        $sizeId = Sizes::where('name', $size)->select('id')->first()->id;
+        $number = Products::find($productId)->sizes()->find($sizeId)->pivot->number;
 
-        if( !is_null($index) ) {
+        if($number >= $newQuantity && !is_null($index)) {
+            $this->totalPrice -= $this->items[$index]['totalPrice'];
             $this->items[$index]['quantity'] = $newQuantity;
+            $this->items[$index]['totalPrice'] = $this->items[$index]['price'] * $this->items[$index]['quantity'];
+            $this->totalPrice += $this->items[$index]['totalPrice'];
+
+            return true;
+        }
+        else {
+            return false;
         }
     }
 

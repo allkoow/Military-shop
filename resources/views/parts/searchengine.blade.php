@@ -1,9 +1,4 @@
-<div class="menu-item menu-item-search">
-    <i class="icon-search"></i>
-    <div class="bookmark">
-		{{ Form::open(['route' => 'products.search', 'class' => 'form-style']) }}
-			{{ Form::text('searchKey', null, ['placeholder' => 'Szukaj...']) }}
-			{{ Form::submit('Szukaj') }}
-		{{ Form::close() }}
-    </div>
-</div>
+{{ Form::open(['route' => 'products.search', 'class' => 'form-search-bar']) }}
+	{{ Form::text('searchKey', null, ['placeholder' => 'Szukaj...']) }}
+	<input type="submit" value="&#xe800;" class="icons"/>
+{{ Form::close() }}

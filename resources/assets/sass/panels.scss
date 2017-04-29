@@ -1,0 +1,125 @@
+$menu-width: 19%;
+
+.panel-container {
+	position: relative;
+	font-size: 0;
+	z-index: 0;
+	.panel-menu {
+		display: inline-block;
+		width: 100%;
+		vertical-align: top;
+		background-color: $color-grey;
+		font-size: 16px;
+		margin-right: 0;
+		margin-bottom: 25px;
+		
+		ul {
+			list-style: none;
+			text-align: center;
+			margin: 0;
+			padding: 0;
+
+			li {
+				display: block;
+				width: 100%;
+				height: 40px;
+				font-size: 1.1em;
+				line-height: 40px;
+				border-bottom: 1px solid $color-grey2;
+
+				a {
+					color: $color-winternight;
+				}
+
+				&:hover {
+					background-color: $color-brown !important;
+					border-bottom: 1px solid $color-brown;
+				}
+			}
+		}
+	}
+
+	.panel-content {
+		display: inline-block;
+		width: 100%;
+		background-color: $color-grey;
+		color: $color-winternight;
+		padding: 5px;
+		box-sizing: border-box;
+		font-size: 16px;
+		margin: 0;
+
+		text-align: center;
+	}
+}
+
+.subpanel-container {
+	position: relative;
+	margin: auto;
+	
+	h1 {
+		text-align: left !important;
+		border-bottom: 1px solid $color-grey3;
+	}
+
+	h2 {
+		text-align: left !important;
+		border-bottom: 1px solid $color-grey3;
+	}
+
+	.panel {
+		vertical-align: top;
+		display: inline-block;
+		width: 100%;
+		padding: 0 10px;
+		margin-bottom: 5px;
+		box-sizing: border-box;
+	}
+
+	.panel-left-align {
+		text-align: left !important;
+	}
+
+	.mini-panel {
+		
+	}
+}
+
+.left-align {
+	text-align: left !important;
+}
+
+.panel-border-bottom {
+	border-bottom: 1px solid $color-grey3;
+	margin-bottom: 5px;
+}
+
+.row {
+	margin: auto;
+}
+
+.row-left-align {
+	text-align: left !important;
+}
+
+@media(min-width: $middle-width) {
+	.subpanel-container {
+		.panel {
+			width: 49%;
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+	.panel-container {
+		.panel-menu {
+			width: $menu-width;
+			margin-right: 1%;
+
+		}
+
+		.panel-content {
+			width: 99% - $menu-width;
+		}
+	}
+}

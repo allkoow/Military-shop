@@ -2,15 +2,78 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
-                        {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+    @if ($errors->has('email'))
+        <div class="information-panel error-panel">
+            <strong>Niepoprawny adres email!</strong>
+        </div>
+    @endif 
+
+    @if ($errors->has('email'))
+        <div class="information-panel error-panel">
+            <strong>Niepoprawny adres email!</strong>
+        </div>
+    @endif
+
+    @if ($errors->has('password'))
+        <div class="information-panel error-panel">
+            <strong>Coś nie tak z hasłem!</strong>
+        </div>
+    @endif
+
+    <div class="subpanel-container">
+        <div class="panel panel-left-align">
+            {{ Form::open(['route' => 'register', 'id' => 'form-login', 'class' => 'form-classic']) }}
+                <div class="row row-left-align">
+                    {{ Form::label('email','Adres email') }}
+                </div>
+
+                <div class="row row-left-align">
+                    {{ Form::email('email', old('email'), ['required', 'placeholder' => 'Podaj adres email...']) }}
+                </div>
+
+                <div class="row row-left-align">
+                    {{ Form::label('name','Imię') }}
+                </div>
+
+                <div class="row row-left-align">
+                    {{ Form::text('name', old('name'), ['required', 'placeholder' => 'Podaj imię...']) }}
+                </div>
+
+                <div class="row row-left-align">
+                    {{ Form::label('surname','Nazwisko') }}
+                </div>
+
+                <div class="row row-left-align">
+                    {{ Form::text('surname', old('surname'), ['required', 'placeholder' => 'Podaj nazwisko...']) }}
+                </div>
+
+                <div class="row row-left-align">
+                    {{ Form::label('password','Hasło') }}
+                </div>
+
+                <div class="row row-left-align">
+                    {{ Form::password('password',['required']) }}
+                </div>
+
+                <div class="row row-left-align">
+                    {{ Form::label('password_confirmation','Hasło') }}
+                </div>
+
+                <div class="row row-left-align">
+                    {{ Form::password('password_confirmation',['required']) }}
+                </div>
+
+                <div class="row row-left-align">
+                    {{ Form::submit('Zarejestruj') }}
+                </div>
+
+            {{ Form::close() }}
+        </div>
+    </div>
+
+
+                        {{-- <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
@@ -67,10 +130,6 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    </form> --}}
+   
 @endsection

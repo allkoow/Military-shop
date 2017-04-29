@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->integer('phone_number');
             $table->float('total',8,2);
             $table->integer('discount');
-            $table->integer('default_address');
             $table->rememberToken();
             $table->timestamps();
         });

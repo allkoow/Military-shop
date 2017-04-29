@@ -1,33 +1,50 @@
 @extends('adminpanel/layout')
 
-@section('categoriesIndex')
-	@if (session('storeInfo'))
-		{{ session('storeInfo') }} </br>
+@section('adminpanel-content')
+	@if (session('information'))
+		<div class="information-panel success-panel">
+			{{ session('information') }}
+		</div>
 	@endif
+	
+	<div class="subpanel-container">
+		<h1>Lista kategorii</h1>
+		
+		<table class="table-default">
+			<tr>
+				<th>Id</th>
+				<th>Nazwa</th>
+				<th></th>
+				<th></th>
+			</tr>
+			
+			@foreach ($categories as $category)
+			<tr>
+				<td>{{$category->id}}</td>
+				<td>{{$category->name}}</td>
+				<td>
+					<a href="{{ URL::route('categories.edit', ['id' => $category->id]) }}">
+						<button class="button-table">Edytuj</button>
+					</a>
+				</td>
+				<td>
+					{{Form::open(['route' => ['categories.destroy', $category->id], 'method' => 'DELETE'])}}
+						{{Form::submit('Usuń',['class' => 'button-table'])}}
+					{{Form::close()}}
+				</td>
+			</tr>
+			@endforeach
+		</table>
+	</div>
 
-		@foreach ($categories as $category)
-			{{ Form::open(['route' => ['categories.checkaction', $category->id], 'method' => 'POST'] ) }}
+	<div class="subpanel-container">
+		<h1>Dodaj nową kategorię</h1>
+		<a href="{{ URL::route('categories.create') }}">
+			<div class="row row-left-align">
+				<button class="button-default">Dodaj</button>
+			</div>
+		</a>
+	</div>
 
-			{{ Form::text('categoryName',$category->name) }} </br>
-
-				@foreach ($category->subcategories as $subcategory)
-
-					{{ Form::text('subcategories[][name]',$subcategory->name) }}
-					{{ Form::hidden('class','Subcategory') }} 
-					<input type="submit" name="action" value="Usuń" />  </br>
-
-				@endforeach
-
-			{{ Form::text('newSubcategory',null, ['placeholder' => 'Wpisz nazwę']) }} </br>
-
-			<input type="submit" name="action" value="Zapisz zmiany" /> </br> </br>
-			{{-- {{ Form::submit('Zapisz zmiany') }} </br> </br> --}}
-			{{ Form::close() }}
-		@endforeach
-
-	{{ Form::open(['route' => 'categories.storecategory']) }}
-		{{ Form::label('newCategory', 'Nowa kategoria: ') }}
-		{{ Form::text('newCategory') }}
-		{{ Form::submit('Dodaj') }}
-	{{ Form::close() }}
 @endsection
+

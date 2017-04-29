@@ -22,7 +22,7 @@ class ProductsTableSeeder extends Seeder
 	        $product->category_id = $faker->numberBetween($min = 1, $max = 4);
             $product->subcategory_id = $faker->numberBetween($min = 1, $max = 6);
             $product->description = $faker->text($maxNbChars = 400);   
-            $product->brand = $faker->numberBetween($min=1,$max=5);
+            $product->brand_id = $faker->numberBetween($min=1,$max=5);
 	        $product->save();
         }
     }

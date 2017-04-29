@@ -5,40 +5,49 @@
 		<span>{{session('deleteAddressError')}}</span>
 	@endif
 
-	<div class="userpanel-addaddres">
-		<a href="{{route('addresses.create')}}">Dodaj nowy adres</a> </br> </br>
-	</div>
-	
-	@foreach($addresses as $address)
-		<div class="userpanel-address">
-			<span>{{$address->name}}</span> </br>
+	@if(count($addresses) > 0)
+		<table class="table-default">
+			<tr>
+				<th>Nazwa</th>
+				<th>Miasto</th>
+				<th>Ulica</th>
+				<th>Kod pocztowy</th>
+				<th></th>
+				<th></th>
+			</tr>
 
-			@if($address->id == Auth::user()->default_address)
-				DOMYŚLNY </br>
-			@endif
-			
-			<span>Miasto: </span> <span>{{$address->city}}</span> </br>
-			
-			<span>Ulica: </span> 
-			<span>{{$address->street}} {{$address->house_number}}
-				@if ($address->apartment_number)
-					<span>/{{$address->apartment_number}}</span> </br>
-				@else
-					</br>
-				@endif
-			</span>
-			
-			<span>Kod pocztowy: </span> <span>{{$address->postcode}}</span> </br>
-			
-			<a href="{{route('addresses.edit',['id' => $address->id])}}">Edytuj</a>
+			@foreach($addresses as $address)
+				<tr>
+					<td>{{$address->name}}</td>
+					<td>{{$address->city}}</td>
+					<td>
+						<span>{{$address->street}}</span>
+						<span>{{$address->house_number}}</span>
+						<span>
+							@if ($address->apartment_number)
+								<span>/{{$address->apartment_number}}</span> </br>
+							@endif
+						</span>
+					</td>
+					<td>{{$address->postcode}}</td>
+					<td>
+						<a href="{{route('addresses.edit',['id' => $address->id])}}">
+							<button class="button-small">Edytuj</button>
+						</a>
+					</td>
+					<td>
+						{{ Form::open(['route' => ['addresses.destroy',$address->id], 'method' => 'DELETE']) }}
+							{{ Form::submit('Usuń',['class' => 'button-small']) }}
+						{{ Form::close() }}
+					</td>
+				</tr>
+			@endforeach
+		</table>
+	@else
+		<p>Nie dodałeś jeszcze żadnych adresów.</p>
+	@endif
 
-			{{ Form::open(['route' => ['addresses.destroy',$address->id], 'method' => 'DELETE']) }}
-				{{ Form::submit('Usuń') }}
-			{{ Form::close() }}
-
-			<a href="addresses/{{$address->id}}/setdefault">Ustaw jako domyślny</a>
-		</div>
-
-		</br>
-	@endforeach
+	<a href="{{route('addresses.create')}}">
+		<button class="button-default">Dodaj nowy adres</button>
+	</a>
 @stop

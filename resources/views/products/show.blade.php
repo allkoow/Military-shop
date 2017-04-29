@@ -2,40 +2,48 @@
 
 @section('content')
 	<div class="product-container">
-		<div class="product-image">
-			<img src="{{URL::asset('images/plecak.jpg')}}" alt="" />
+		<div class="panel product-image">
+			@if (count($product->images)>0)
+				<img src="{{URL::asset('images/'.$product->images[0]->path)}}" alt="" />
+			@endif
 		</div>
 		
-		<div class="product-param">
+		<div class="panel product-param">
 			<h1>{{$product->name}}</h1>
 			<div class="brand-name">{{$product->brand->name}}</div>
 			
 			<div class="product-availability">
-				<i class="icon-ok">dostępny</i>
+				@if($product->number)
+					<i class="icon-ok">dostępny</i>
+				@else
+					<i class="icon-cancel">niedostępny</i>
+				@endif
 			</div>
 
 			<div class="product-price">
-				<span>{{$product->price}}</span>
+				<span>{{ number_format($product->price, 2, ',', '') }}</span>
 				<span> zł </span>
 			</div>
+			
+			@if($product->number)
+				{{ Form::open(['route' => ['cart.add',$product->id]]) }}
+					
+					@if($product->sizes()->first()->name != $product->noSize)
+						<div class="product-size">
+							<span>Wybierz rozmiar</span>
+							{{ Form::select('size',$selectedSizes,1, ['class' => 'select-default']) }}
+						</div>
+					@endif
 
-			{{ Form::open(['route' => ['cart.add',$product->id]]) }}
-				
-				@if($product->sizes()->first()->name != $product->noSize)
-					<div class="product-size">
-						@if(session('message'))
-							{{ session('message') }}
-						@endif
-
-						<span>Wybierz rozmiar</span>
-						{{ Form::select('size',$selectedSizes,1, ['class' => 'select-default']) }}
+					<div class="product-to-basket">
+						{{ Form::submit('Dodaj do koszyka',['class' => 'button-default']) }}
 					</div>
-				@endif
-
+				{{ Form::close() }}
+			@else
 				<div class="product-to-basket">
-					{{ Form::submit('Dodaj do koszyka',['class' => 'button-default']) }}
+					<button class="button-default button-disabled">Brak produktu</button>
 				</div>
-			{{ Form::close() }}
+			@endif
 			
 		</div>
 		
@@ -44,3 +52,4 @@
 		</p>
 	</div>
 @stop
+

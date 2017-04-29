@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Products;
 use App\User;
@@ -27,6 +28,10 @@ class HomeController extends Controller
         } 
         else {
             $products = Products::paginate(20);
+        }
+
+        foreach ($products as $product) {
+            $product->images = DB::table('images')->where('product_id',$product->id)->get();
         }
 
         return view('home.index',compact('products'));

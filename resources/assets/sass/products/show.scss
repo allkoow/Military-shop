@@ -29,7 +29,6 @@ $width: 300px;
 		}
 		
 		.brand-name {
-			text-align: right;
 			font-size: 1.5em;
 			margin-bottom: 15px;
 		}
@@ -61,6 +60,36 @@ $width: 300px;
 			
 		.product-to-basket {
 			margin-bottom: 15px;
+		}
+	}
+}
+
+@media (min-width: $max-width) {
+	.product-container{
+
+		.product-image {
+			width: 45% !important;
+			height: 45% !important;
+			margin: 0;
+		}
+		.product-param {
+			display: inline-block;
+			vertical-align: top;
+			width: 45% !important;
+			color: $color-winternight;
+			background-color: white;
+			
+			h1 {
+				text-align: right;
+			}
+
+			.product-price, .product-to-basket, .product-size {
+				text-align: left;
+			}
+
+			.brand-name, .product-availability {
+				text-align: right;
+			}
 		}
 	}
 }

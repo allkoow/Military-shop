@@ -15,15 +15,20 @@ class CreateProducts extends Migration
             $table->integer('subcategory_id')->unsigned();
             $table->float('price');
             $table->text('description');
-            $table->integer('brand')->unsigned();
+            $table->integer('brand_id')->unsigned();
             $table->enum('sex',['male','female','unisex']);
+            $table->integer('number')->unsigned()->nullable();
             $table->timestamps();
         });
 
         Schema::table('products', function(Blueprint $table) {
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('subcategory_id')->references('id')->on('subcategories');
-            $table->foreign('brand')->references('id')->on('brands');
+            $table->foreign('brand_id')->references('id')->on('brands');
+        });
+
+        Schema::table('products', function ($table) {
+            $table->softDeletes();
         });
 
     }

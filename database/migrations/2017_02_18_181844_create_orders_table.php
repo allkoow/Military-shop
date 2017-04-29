@@ -16,9 +16,10 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->date('date');
             $table->enum('status',['oczekiwanie na płatność','oczekiwanie na wysyłkę','wysłano']);
             $table->integer('delivery_method_id')->unsigned();
+            $table->integer('payment_method_id')->unsigned();
+            $table->integer('address_id')->unsigned();
             $table->float('value',8,2);
             $table->timestamps();
         });
@@ -26,6 +27,7 @@ class CreateOrdersTable extends Migration
         Schema::table('orders', function(Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('delivery_method_id')->references('id')->on('delivery_methods');
+            $table->foreign('address_id')->references('id')->on('addresses');
         });
     }
 

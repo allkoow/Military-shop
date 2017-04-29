@@ -27,6 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function addRole($role) {
+        $this->roles()->attach($role);
+    }
+
     public function roles() {
         return $this->belongsToMany(Roles::class,'roles_has_users','user_id','role_id')->withTimestamps();
     }

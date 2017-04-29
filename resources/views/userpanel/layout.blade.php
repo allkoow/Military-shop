@@ -1,13 +1,36 @@
 @extends('layout')
 
 @section('content')
-	<div class="userpanel-menu">
+<div class="panel-container">
+	
+	<div class="panel-menu">
 		<ul>
-			<li><a href="/../userpanel/addresses">Adresy</a></li>
-			<li><a href="/../userpanel/orders">Zamówienia</a></li>
-			<li><a href="/../userpanel/settings">Ustawienia konta</a></li>
+			<a href="/../userpanel/addresses">
+				<li>
+					<i class="icon-address-card"></i>
+					<span>Adresy</span>
+				</li>
+			</a>
+
+			<a href="/../userpanel/orders">
+				<li>
+					<i class="icon-shopping-bag"></i>
+					<span>Zamówienia</span>
+				</li>
+			</a>
+
+			<a href="/../userpanel/settings">
+				<li>
+					<i class="icon-cog"></i>
+					<span>Ustawienia konta</span>
+				</li>
+			</a>
 		</ul>
 	</div>
-	
-	@yield('userpanel-content')
+
+	<div class="panel-content">
+		@yield('userpanel-content')
+	</div>
+
+</div>
 @stop

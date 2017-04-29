@@ -7,7 +7,9 @@
 
         <link href="https://fonts.googleapis.com/css?family=Dosis:400,600&subset=latin-ext" rel="stylesheet">
         <link rel="stylesheet" href="{{URL::asset('css/fontello/css/fontello.css')}}" />
-        <link rel="stylesheet" href="{{URL::asset('css/app.css')}}" />
+        <link rel="stylesheet" href="{{asset('css/app.css')}}" />
+        
+
 
         {{-- TinyMCE --}}
         <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
@@ -16,31 +18,53 @@
         <title>Sklep</title>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        <script src="{{URL::asset('js/main.js')}}" type="text/javascript"></script>
-        <script src="{{URL::asset('js/ResponsiveSlides/responsiveslides.min.js')}}"></script>
+        <script src="{{asset('js/main.js')}}" type="text/javascript"></script>
 
     </head>
     <body>
         <div class="container">
            
            <header>
-                <div id="header-container">
-                    <div id="logo" >
-                        <span><a href="/">logo</a></span>
+                <div id="menu-container">
+                    <div class="menu-item menu-item-logo">
+                        <a href="/../home">logo</a>
                     </div>
-                    
-                    @include('parts.searchengine')
-                    @include('parts.loginpanel')
-                    @include('parts.cart')
-                    @include('parts.menu')
-                </div>
+
+                    <div class="menu-item right-container">
+                        @include('parts/loginpanel')
+                        
+                        <a href="/../cart">
+                            <div class="menu-item-icon ">
+                                <i class="icon-basket"></i>
+                                <span>Koszyk</span>
+                                <span>
+                                    @if(Session::has('cart'))
+                                        <span class="cart-price">({{$cart->totalPrice}} zł)</span>
+                                    @endif
+                                </span>
+                            </div>
+                        </a>
+                        
+                        <div class="menu-item-icon menu-item-icon-nav">
+                            <div class="menu-item-nav">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="search-bar">
+                        @include('parts/searchengine')
+                    </div>
+                </div> 
             </header>
+
+            <nav>
+                @include('parts/nav')
+            </nav> 
             
             <div id="content">
-                @yield('productList')
-
-                @yield('productPage')
-
                 @yield('login')
 
                 @yield('userpanel')

@@ -21,3 +21,31 @@
 		}
 	}
 }
+
+.table-default{
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+	color: $color-winternight;
+	
+	tr {
+		margin: 0;
+		padding: 0;
+		height: 40px;
+		line-height: 40px;
+		text-align: center !important;
+		background-color: $color-grey2;
+
+		td {
+			height: 40px;
+			line-height: 40px;
+			margin: 0;
+			padding: 0;
+			text-align: center !important;
+		}
+
+		&:nth-child(even) {
+			background-color: $color-grey3;
+		}
+	}
+}

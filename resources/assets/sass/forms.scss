@@ -54,39 +54,248 @@
 	}
 }
 
-.checkbox-default {
-	border: 1px solid $color-grey2;
-	background-color: $color-grey;
+.button-table {
+	height: 30px;
+	width: 100px;
+	border: 1px solid $color-black;
+	background-color: $color-brown;
+	font-family: $font-default;
+
+	&:hover {
+		cursor: pointer;
+		background-color: $color-brown2;
+	}
 }
 
-.form-style {
+.button-disabled {
+	background-color: $color-grey !important;
+
+	&:hover {
+		cursor: default !important;
+	}
+}
+
+.button-small {
+	height: 30px;
+	width: 120px;
+	border: 1px solid $color-black;
+	background-color: $color-brown;
+	font-family: $font-default;
+	font-size: 0.9em;
+	line-height: 25px;
+	display: inline-block;
+	box-sizing: border-box;
+	vertical-align: middle;
+
+	&:hover {
+		cursor: pointer;
+		background-color: $color-brown2;
+	}
+}
+
+.button-cart {
+	height: 25px;
+	width: 75px;
+	border: 1px solid $color-black;
+	background-color: $color-brown;
+	font-family: $font-default;
+
+	&:hover {
+		cursor: pointer;
+		background-color: $color-brown2;
+	}
+}
+
+.text-cart {
+	height: 25px;
+	width: 40px;
+	border: 1px solid $color-black;
+	font-family: $font-default;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.form-classic {
 	padding: 5px;
 	text-align: center;
-	border-bottom: 1px solid $color-grey3;
+	width: 100%;
+	box-sizing: border-box;
 
-	input[type="text"], input[type="email"], input[type="password"] 
-	{
-		display: inline-block;
-		width: 100%;
-		height: 30px;
-		border: 1px solid $color-black;
+	input[type="text"], 
+	input[type="password"], 
+	input[type="email"],
+	input[type="submit"],
+	input[type="number"],
+	select {
+		
 		padding: 5px;
+		font-size: 1.1em;
+		font-family: $font-default;
+		display: inline-block;
+		height: 40px;
+		box-sizing: border-box;
+	}
+
+	input[type="text"], input[type="password"], input[type="email"] {
+		border: 1px solid $color-grey2;
+		width: 200px;
+		
 		margin-bottom: 5px;
 	}
 
-	input[type="submit"] 
-	{
+	input[type="submit"] {
 		border: 1px solid $color-black;
-		padding: 5px;
-		width: 100%;
-		height: 30px;
-		min-width: 100px;
+		width: 150px;
+		margin: 10px 0;
 		background-color: $color-brown;
-
+		
 		&:hover
 		{
 			cursor: pointer;
 			background-color: $color-brown2;
 		}
 	}
+
+	input[type="number"] {
+		border: 1px solid $color-grey2;
+		width: 80px;
+
+		margin-bottom: 5px;
+	}
+
+	label {
+		display: inline-block;
+		width: 120px;
+		text-transform: none !important;
+		margin-top: 5px;
+		padding-left: 5px;
+	}
+
+	select {
+		width: 200px;
+		border: 1px solid $color-grey2;
+	}
+}
+
+.form-max-width {
+	input[type="text"], 
+	input[type="password"], 
+	input[type="email"],
+	input[type="number"],
+	select,
+	label {
+		width: 100% !important;
+	}
+}
+
+.input-file {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+	text-align: center;
+
+	&+ label{
+		text-align: center;
+		display: inline-block;
+		text-align: left;
+		line-height: 25px;
+		width: 125px !important;
+		height: 25px;
+		background-color: $color-brown;
+		border: 1px solid black;
+	}
+
+	&:focus + label, &+ label:hover {
+		cursor: pointer;
+		background-color: $color-brown2;
+	}
+}
+
+#form-login {
+	text-align: center;
+	width: 100%;
+	padding: 5px;
+
+	input[type="text"], input[type="email"], input[type="password"] {
+		width: 100%;
+		//margin-left: 5px;
+		//margin-right: 5px !important;
+		margin-bottom: 10px;
+	}
+
+	input[type="submit"] {
+		width: 200px;
+	}
+	
+	label, i {
+		font-size: 1.1em;
+	}
+
+	label {
+		margin-left: 0;
+		margin-bottom: 5px;
+	}
+}
+
+.form-search-bar {
+	input[type="text"] {
+		width: 75%;
+		height: 40px;
+		border: 1px solid $color-black;
+		padding: 5px;
+		font-family: $font-default;
+		font-size: 20px;
+		box-sizing: border-box;
+		margin-right: 5px;
+	}
+
+	input[type="submit"] {
+		border: 1px solid $color-black;
+		vertical-align: top;
+		height: 40px;
+		width: 15%;
+		background-color: $color-brown;
+
+		&:hover {
+			cursor: pointer;
+			background-color: $color-brown2;
+		}
+	}
+}
+
+input[type="radio"], input[type="checkbox"] {
+    display:none;
+
+    & + label {
+    	width: 100%;
+
+    	& span {
+    		display: inline-block;
+    		margin: -4px 5px 0px 0px;
+    		vertical-align: middle;
+    		width: 16px;
+    		height: 16px;
+    		cursor: pointer;
+    		border: 1px solid black;
+    		background-color: white;
+    	}
+    }
+
+    &:checked + label span {
+    	&:before {
+    		content: '';
+    		display: inline-block;
+    		height: 14px;
+    		width: 14px;
+    		margin: 1px;
+    		background-color: black;
+    	}
+    }
+}
+
+input[type="checkbox"] + label {
+	margin-right: 5px;
 }
