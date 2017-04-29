@@ -13,20 +13,15 @@
 	            <th>Cena</th>
 	    	</tr>
 
-	    	@foreach ($cart->items as $item)
+	    	@foreach (Cart::content() as $item)
 	        <tr>
 	            <td>
-	                {{ $item['name']}}
-
-	                @if( $item['size'] != 'nie dotyczy')
-	                    {{ $item['size'] }}
-	                @endif
-	            
+	                {{ $item->name}}
 	            </td>
 
-	            <td>{{ $item['price'] }} zł</td>
-				<td>{{ $item['quantity'] }}</td>
-	            <td>{{ $item['totalPrice'] }} zł</td>
+	            <td>{{ $item->price }} zł</td>
+				<td>{{ $item->qty }}</td>
+	            <td>{{ $item->subtotal }} zł</td>
 	            
 	        </tr>
 	        @endforeach
@@ -52,7 +47,7 @@
 			
 	</div>
 
-	<h2>Koszt zamówienia: {{ $cart->totalPrice + $delivery->cost }} zł </h2>
+	<h2>Koszt zamówienia: {{ Cart::subtotal() + $delivery->cost }} zł </h2>
 	
 	<div class="subpanel-container">
 		<h1>Składam zamówienie</h1>
