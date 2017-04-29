@@ -26,17 +26,23 @@
 			</div>
 			
 			@if($product->number)
-				{{ Form::open(['route' => ['cart.add',$product->id]]) }}
+				{{ Form::open(['route' => 'cart.store']) }}
 					
+					{{ Form::hidden('productId', $product->id )}}
+					{{ Form::hidden('productName', $product->name ) }}
+					{{ Form::hidden('productPrice', $product->price ) }}
+
 					@if($product->sizes()->first()->name != $product->noSize)
 						<div class="product-size">
 							<span>Wybierz rozmiar</span>
-							{{ Form::select('size',$selectedSizes,1, ['class' => 'select-default']) }}
+							{{ Form::select('sizeId', $sizesForSelect, 1, ['class' => 'select-default']) }}
 						</div>
+					@else
+							{{ Form::hidden('sizeId', $product->noSize) }}
 					@endif
 
 					<div class="product-to-basket">
-						{{ Form::submit('Dodaj do koszyka',['class' => 'button-default']) }}
+						{{ Form::submit('Dodaj do koszyka', ['class' => 'button-default']) }}
 					</div>
 				{{ Form::close() }}
 			@else

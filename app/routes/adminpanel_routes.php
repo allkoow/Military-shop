@@ -74,11 +74,6 @@ Route::group(['prefix' => 'adminpanel',
 				'as' => 'payments.store',
 				'uses' => 'Admin\AdminPaymentsController@store'
 			]);
-
-			Route::destroy('/{payment}', [
-				'as' => 'payments.destroy',
-				'uses' => 'Admin\AdminPaymentsController@destroy'
-			]);
 	});
 
 	Route::group(['prefix' => 'brands'], function() {
