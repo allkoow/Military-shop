@@ -38,8 +38,8 @@
                                 <i class="icon-basket"></i>
                                 <span>Koszyk</span>
                                 <span>
-                                    @if(Session::has('cart'))
-                                        <span class="cart-price">({{$cart->totalPrice}} zł)</span>
+                                    @if(Cart::count())
+                                        <span class="cart-price">({{Cart::subtotal()}} zł)</span>
                                     @endif
                                 </span>
                             </div>

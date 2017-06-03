@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    @if($cart)
+    @if(Cart::count())
     <div class="subpanel-container">
         @if (Session::has('error'))
             <div class="information-panel error-panel">
@@ -9,6 +9,7 @@
             </div>
         @endif
         <h1>Lista produktów</h1>
+
         <table class="table-default">
             <tr>
                 <th>Nazwa</th>
@@ -18,31 +19,25 @@
                 <th></th>
             </tr>
 
-            @foreach ($cart->items as $item)
+            @foreach(Cart::content() as $item)
                 <tr>
                     <td>
-                        {{ $item['name']}}
-
-                        @if( $item['size'] != 'nie dotyczy')
-                            {{ $item['size'] }}
-                        @endif
-                    
+                        <span>{{ $item->name}}</span>
+                        {{-- <span>{{ $item->model->sizes->find($item->options->size)->name }}</span> --}}
                     </td>
 
-                    <td>{{ $item['price'] }}</td>
+                    <td>{{ $item->price }} zł</td>
                     
                     <td>
-                        {{ Form::open(['route' => ['cart.setquantity', $item['id']]]) }}
-                            {{ Form::hidden('size', $item['size']) }}
-                            {{ Form::number('quantity',$item['quantity'],['min' => 1, 'class' => 'text-cart']) }}
+                        {{ Form::open(['route' => ['cart.update', $item->rowId], 'method' => 'PUT']) }}
+                            {{ Form::number('quantity',$item->qty,['min' => 1, 'class' => 'text-cart']) }}
                             {{ Form::submit('zmień',['class' => 'button-cart']) }}
                         {{ Form::close() }}
                     </td>
                     
-                    <td>{{ $item['totalPrice'] }}</td>
+                    <td>{{ $item->subtotal }} zł</td>
                     <td>
-                        {{ Form::open(['route' => ['cart.discard',$item['id']]]) }}
-                            {{ Form::hidden('size',$item['size']) }}
+                        {{ Form::open(['route' => ['cart.destroy', $item->rowId], 'method' => 'DELETE']) }}
                             <input type="submit" value="&#xf1f8;" class="icons cart-trash"/>
                         {{ Form::close() }}
                     </td> 

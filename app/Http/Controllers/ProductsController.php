@@ -46,19 +46,18 @@ class ProductsController extends Controller
 
     public function show($name)
     {
-		$product = Products::where('name',$name)->first();
+		$product = Products::where('name', $name)->first();
 		$product->brand = $product->brand()->first();
         $product->sizes = $product->sizes()->where('number', '>', 0)->get();
+        $product->images = DB::table('images')->where('product_id', $product->id)->get();
 
-        $product->images = DB::table('images')->where('product_id',$product->id)->get();
+        $sizesForSelect = array();
 
-        $selectedSizes = array();
-
-        foreach($product->sizes as $p) {
-            $selectedSizes[$p->id] = $p->name;
+        foreach($product->sizes as $size) {
+            $sizesForSelect[$size->id] = $size->name;
         }
 
-        return view('products.show', compact(['product','selectedSizes']));
+        return view('products.show', compact(['product','sizesForSelect']));
     }
 
     public function search(Request $request)

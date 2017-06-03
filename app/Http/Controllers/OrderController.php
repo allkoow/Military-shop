@@ -12,6 +12,7 @@ use App\Products;
 use App\Sizes;
 use App\Addresses;
 use App\AddressBuilder;
+use Cart;
 
 class OrderController extends Controller
 {
@@ -23,14 +24,11 @@ class OrderController extends Controller
     	$deliveryMethods = DeliveryMethods::all();
     	$paymentMethods = PaymentMethod::all();
 
-    	$cart = Session::has('cart') ? Session::get('cart') : null;
-
-    	return view('order.create', compact(['deliveryMethods', 'paymentMethods', 'cart']));
+    	return view('order.create', compact(['deliveryMethods', 'paymentMethods']));
     }
 
     public function summary(Request $request) {
         $data = $request->all();
-        $cart = Session::get('cart');
         
         // Add new order
         $order = new Orders();
@@ -38,7 +36,7 @@ class OrderController extends Controller
         $order->status = 'oczekiwanie na płatność';
         $order->delivery_method_id = $data['delivery'];
         $order->payment_method_id = $data['payment'];
-        $order->value = $cart->totalPrice;
+        $order->value = Cart::subtotal();
 
         Session::put('order', $order);
         
@@ -67,29 +65,28 @@ class OrderController extends Controller
         Session::put('address', $address);
         Session::put('payment', $payment);
         
-        return view('order.summary', compact(['cart', 'order', 'address', 'payment', 'delivery']));
+        return view('order.summary', compact(['order', 'address', 'payment', 'delivery']));
     }
 
     public function store(Request $request) {
     	
         $confirmation = $request->input('confirmation');
         $order = Session::get('order');
-        $cart = Session::get('cart');
         
         if($confirmation) {
             $order->save();
 
             //Add items to orders_has_products table and update products table
-            foreach ($cart->items as $item) {
-                $order->products()->attach($item['id'], ['order_id' => $order->id]);
+            foreach (Cart::content() as $item) {
+                $order->products()->attach($item->id, ['order_id' => $order->id]);
 
-                $product = Products::find($item['id']);
-                $product->number -= $item['quantity'];
+                $product = Products::find($item->id);
+                $product->number -= $item->qty;
                 $product->save();
 
                 // Update number of sizes
-                $size = Sizes::where('name',$item['size'])->select('id')->first();
-                $number = $product->sizes()->find($size->id)->pivot->number - $item['quantity'];
+                $size = Sizes::where('name', $item->size)->select('id')->first();
+                $number = $product->sizes()->find($size->id)->pivot->number - $item->qty;
                 $product->sizes()->updateExistingPivot($size->id, ['number' => $number]);
             }
 
@@ -107,7 +104,7 @@ class OrderController extends Controller
 
     public function confirm() {
 
-        Session::forget('cart');
+        Cart::destroy();
         Session::forget('order');
 
         return view('order.confirmation');
